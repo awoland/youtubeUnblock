@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=youtubeUnblock
 PKG_VERSION:=0.3.0
 PKG_REV:=e649ef5567846064f7466786a3c6fc6af4fd18f5
-PKG_RELEASE:=1
+PKG_RELEASE:=2
 
 PKG_SOURCE_URL:=https://github.com/awoland/youtubeUnblock.git
 PKG_SOURCE_PROTO:=git
