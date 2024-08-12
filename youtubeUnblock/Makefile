@@ -7,9 +7,10 @@ PKG_VERSION:=0.3.0
 PKG_REV:=e649ef5567846064f7466786a3c6fc6af4fd18f5
 PKG_RELEASE:=1
 
-PKG_SOURCE_URL:=https://github.com/Waujito/youtubeUnblock.git
+PKG_SOURCE_URL:=https://github.com/awoland/youtubeUnblock.git
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_VERSION:=$(PKG_REV)
+PKG_BUILD_DEPENDS:= +libmnl +libnetfilter_queue +libnfnetlink +iptables
 
 include $(INCLUDE_DIR)/package.mk
 
@@ -17,7 +18,7 @@ define Package/youtubeUnblock
 	SECTION:=net
 	CATEGORY:=Networking
 	TITLE:=youtubeUnblock
-	DEPENDS:=+libpthread
+	DEPENDS:=+libpthread +libmnl +libnetfilter-queue +libnfnetlink +iptables
 	URL:=https://github.com/Waujito/youtubeUnblock
 	MAINTAINER:=Vadim Vetrov <vetrovvd@gmail.com>
 endef
@@ -41,12 +42,12 @@ define Build/Compile
 endef
 
 define Package/youtubeUnblock/install
-	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/youtubeUnblock $(1)/usr/bin
-	$(INSTALL_DIR) $(1)/etc/init.d
-	$(INSTALL_BIN) ./files/youtubeUnblock.owrt $(1)/etc/init.d/youtubeUnblock
-	$(INSTALL_DIR) $(1)/usr/share/nftables.d/ruleset-post/
-	$(CP) ./files/537-youtubeUnblock.nft $(1)/usr/share/nftables.d/ruleset-post/537-youtubeUnblock.nft
+	$(INSTALL_DIR) $(1)/opt/sbin
+	$(INSTALL_BIN) $(PKG_BUILD_DIR)/build/youtubeUnblock $(1)/opt/sbin
+	$(INSTALL_DIR) $(1)/opt/etc/init.d
+	$(INSTALL_BIN) ./files/youtubeUnblock.owrt $(1)/opt/etc/init.d/youtubeUnblock
+	$(INSTALL_DIR) $(1)/opt/etc/ndm/netfilter.d/
+	$(CP) ./files/537-youtubeUnblock.nft $(1)/opt/etc/ndm/netfilter.d/537-youtubeUnblock.nft
 endef
 
 $(eval $(call BuildPackage,youtubeUnblock))
