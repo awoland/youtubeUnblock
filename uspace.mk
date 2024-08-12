@@ -62,11 +62,11 @@ $(LIBNETFILTER_QUEUE): $(LIBNFNETLINK) $(LIBMNL)
 	$(MAKE) -C deps/libnetfilter_queue
 	$(MAKE) install -C deps/libnetfilter_queue
 
-$(APP): $(OBJS) $(LIBNETFILTER_QUEUE) $(LIBMNL)
+$(APP): $(OBJS)
 	@echo 'CCLD $(APP)'
-	$(CCLD) $(OBJS) -o $(APP) $(LDFLAGS) -lmnl -lnetfilter_queue -lpthread
+	$(CCLD) $(OBJS) -o $(APP) $(LDFLAGS) -lmnl -lnetfilter_queue -lnfnetlink -lpthread
 
-$(BUILD_DIR)/%.o: %.c $(LIBNETFILTER_QUEUE) $(LIBMNL) config.h
+$(BUILD_DIR)/%.o: %.c config.h
 	@echo 'CC $@'
 	$(CC) -c $(CFLAGS) $(LDFLAGS) $< -o $@
 
