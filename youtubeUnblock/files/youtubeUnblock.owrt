@@ -1,13 +1,16 @@
 #!/bin/sh /etc/rc.common
 USE_PROCD=1
 
+START=50
+STOP=50
+
 # Openwrt procd script: https://openwrt.org/docs/guide-developer/procd-init-script-example
 # The program should be put into /usr/bin/
 # This file should be put into /etc/init.d/
 
 start_service() {
 	procd_open_instance
-	procd_set_param command /usr/bin/youtubeUnblock
+	procd_set_param command /opt/sbin/youtubeUnblock
 
 	procd_set_param nice -20
 
