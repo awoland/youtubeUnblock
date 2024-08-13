@@ -13,6 +13,7 @@ jobs:
       version: ${{ steps.build.outputs.version }}
     strategy:
       matrix:
+        branch: [entware]
         arch:
           - aarch64-3.10
     steps:
