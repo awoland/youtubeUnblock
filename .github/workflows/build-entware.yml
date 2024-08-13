@@ -1,10 +1,8 @@
 name: Entware Workflow
 
 on:
-  workflow_dispatch:
-  push:
-    branches: 
-      - main
+   release:
+    types: [published]
 
 jobs:
   build:
@@ -68,7 +66,7 @@ jobs:
       - name: Prepare workflow
         shell: bash
         run: |
-          sed -i 's/PKG__REV:=.*$/PKG__REV:=${{ github.sha }}/;s/PKG_VERSION:=.*$/PKG_VERSION:=${{steps.get_tag.outputs.version}}/' youtubeUnblock/Makefile
+          sed -i 's/PKG__REV:=.*$/PKG__REV:=${{ github.sha }}/;s/PKG_VERSION:=.*$/PKG_VERSION:=${{github.event.release.tag_name}}/' youtubeUnblock/Makefile
           
       - name: Build packages
         id: build
