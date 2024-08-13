@@ -13,7 +13,6 @@ jobs:
       version: ${{ steps.build.outputs.version }}
     strategy:
       matrix:
-        branch: [entware]
         arch:
           - aarch64-3.10
     steps:
@@ -68,7 +67,7 @@ jobs:
       - name: Prepare workflow
         shell: bash
         run: |
-          sed -i 's/PKG_REV:=.*$/PKG_REV:=${{ github.sha }}/;s/PKG_VERSION:=.*$/PKG_VERSION:=$(date %Y%m%d)/' youtubeUnblock/Makefile
+          sed -i 's/PKG__REV:=.*$/PKG__REV:=${{ github.sha }}/;s/PKG__VERSION:=.*$/PKG__VERSION:=$(date %Y%m%d)/' youtubeUnblock/Makefile
           
       - name: Build packages
         id: build
